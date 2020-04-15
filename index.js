@@ -131,7 +131,7 @@ function tocPlugin (md, options) {
       }
       tree.c.forEach(node => {
         if (isLevelSelected(node.l)) {
-          buffer += (`<li${itemClass}><a${linkClass} href="#${unique(options.slugify(node.n))}">${typeof _options.format === 'function' ? _options.format(node.n, htmlencode) : htmlencode(node.n)}</a>${ast2html(node)}</li>`)
+          buffer += (`<li${itemClass}><a${linkClass} href="#${unique(node.id || options.slugify(node.n))}">${typeof _options.format === 'function' ? _options.format(node.n, htmlencode) : htmlencode(node.n)}</a>${ast2html(node)}</li>`)
         } else {
           // unique(options.slugify(node.n))
           buffer += ast2html(node)
@@ -147,7 +147,7 @@ function tocPlugin (md, options) {
   }
 
   function headings2ast (tokens) {
-    const ast = { l: 0, n: '', c: [] }
+    const ast = { l: 0, n: '', id: null, c: [] }
     const stack = [ast]
 
     for (let i = 0, iK = tokens.length; i < iK; i++) {
@@ -160,9 +160,12 @@ function tocPlugin (md, options) {
             .reduce(function (s, t) { return s + t.content }, '')
         )
 
+        const attr = token.attrs.find((value) => value[0] == 'id')
+
         const node = {
           l: parseInt(token.tag.substr(1), 10),
           n: key,
+          id: attr ? attr[1] : null,
           c: []
         }
 
