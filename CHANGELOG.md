@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.1.1] - 2020-04-15
+### Added
+- `markdown-it-attrs` support [#25](https://github.com/nagaozen/markdown-it-toc-done-right/issues/25)
+
 ## [4.1.0] - 2019-10-17
 ### Added
 - accept options in the placeholder [#16](https://github.com/nagaozen/markdown-it-toc-done-right/issues/16)
